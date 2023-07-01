@@ -1,11 +1,10 @@
 #include "test.h"
 
-
 int main() {
-	return test_helloTrangle();
+	return helloTrangle_practice3();
 }
 
-int test_helloTrangle() {
+int helloTrangle_test() {
 
 #pragma region Hard-encode GLSL
 	const char* vertexShaderSource = "#version 460 core\n"
@@ -49,7 +48,7 @@ int test_helloTrangle() {
 	//Create shader program
 	unsigned int shaderProgram;
 
-	return test_helloWindow([vertices, indices, vertexShaderSource, fragmentShaderSource, &shaderProgram, &VBO, &VAO, &EBO]() {
+	return helloWindow_test(true, [vertices, indices, vertexShaderSource, fragmentShaderSource, &shaderProgram, &VBO, &VAO, &EBO]() {
 		//Gen and bind VAO
 		glGenVertexArrays(1, &VAO);
 		glBindVertexArray(VAO);
@@ -145,11 +144,15 @@ int test_helloTrangle() {
 		});
 }
 
-int test_helloWindow(std::function<void()> beforeLoop, std::function<void()> onLoop, std::function<void()> afterLoop) {
+int helloWindow_test(bool isCore, std::function<void()> beforeLoop, std::function<void()> onLoop, std::function<void()> afterLoop) {
 	glfwInit();
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 4);
-	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+
+	if (isCore)
+	{
+		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+	}
 
 	//Create Window
 	GLFWwindow* window = glfwCreateWindow(800, 600, "LearnOpenGL", NULL, NULL);
@@ -176,8 +179,8 @@ int test_helloWindow(std::function<void()> beforeLoop, std::function<void()> onL
 	//Render Loop
 	while (!glfwWindowShouldClose(window))
 	{
-		//Check Input Event
-		processInput(window);
+		//Check Default Input Event
+		processInput_key_press(window, GLFW_KEY_ESCAPE, [&window]() {glfwSetWindowShouldClose(window, true); });
 
 		//Render Command
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
@@ -204,8 +207,32 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 	glViewport(0, 0, width, height);
 }
 
-void processInput(GLFWwindow* window)
+void processInput_key_press(GLFWwindow* window, int key, std::function<void()> pressEvent)
 {
-	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
-		glfwSetWindowShouldClose(window, true);
+	if (glfwGetKey(window, key) == GLFW_PRESS)
+		pressEvent();
 }
+
+void processInput_key_up(GLFWwindow* window, int key, std::function<void()> pressEvent)
+{
+	if (glfwGetKey(window, key) == GLFW_RELEASE)
+		pressEvent();
+}
+
+void processInput_mouseBtn_press(GLFWwindow* window, int key, std::function<void()> pressEvent)
+{
+	if (glfwGetMouseButton(window, key) == GLFW_PRESS)
+		pressEvent();
+}
+
+void processInput_mouseBtn_up(GLFWwindow* window, int key, std::function<void()> pressEvent)
+{
+	if (glfwGetMouseButton(window, key) == GLFW_RELEASE)
+		pressEvent();
+}
+
+void processInput_event_mouse(GLFWwindow* window, int mouseBtn, triggerManager* trigger)
+{
+	trigger->changeState(glfwGetMouseButton(window, mouseBtn) == GLFW_PRESS);
+}
+

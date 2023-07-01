@@ -142,11 +142,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="practice.cpp" />
     <ClCompile Include="test.cpp" />
     <ClCompile Include="src\glad.c" />
+    <ClCompile Include="triggerManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="practice.h" />
     <ClInclude Include="test.h" />
+    <ClInclude Include="triggerManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
