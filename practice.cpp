@@ -392,11 +392,12 @@ int helloTrangle_practice3() {
 				shaderPrograms[1] = &shaderProgram2;
 				if (isUp)
 				{
-					pShaderProgram = shaderPrograms[(++index) % 2];
-					//std::cout << shaderProgram1 << std::endl
-					//	<< shaderProgram2 << std::endl
-					//	<< *shaderPrograms[0] << std::endl
-					//	<< *shaderPrograms[1] << std::endl;
+					int fixInd = (++index) % 2;
+					//Console debug
+					system("cls");
+					std::cout << "Current shader program index = " << fixInd << std::endl;
+					//Pointer move
+					pShaderProgram = shaderPrograms[fixInd];
 				}
 			}
 		);
