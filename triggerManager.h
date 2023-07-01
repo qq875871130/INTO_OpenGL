@@ -1,14 +1,14 @@
 #pragma once
 #include <functional>
 
-class triggerManager
+class TriggerManager
 {
 private:
 	bool curState;
 	std::function<void(bool)> triggerEvent;
 
 public:
-	triggerManager(bool init);
+	TriggerManager(bool init);
 	void setTrigger(std::function<void(bool)> triggerEvent);
 	bool getState();
 	void  changeState(bool newState);

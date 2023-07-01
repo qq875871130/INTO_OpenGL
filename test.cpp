@@ -202,10 +202,6 @@ int helloWindow_test(bool isCore, std::function<void()> beforeLoop, std::functio
 	return 0;
 }
 
-void framebuffer_size_callback(GLFWwindow* window, int width, int height)
-{
-	glViewport(0, 0, width, height);
-}
 
 void processInput_key_press(GLFWwindow* window, int key, std::function<void()> pressEvent)
 {
@@ -231,7 +227,7 @@ void processInput_mouseBtn_up(GLFWwindow* window, int key, std::function<void()>
 		pressEvent();
 }
 
-void processInput_event_mouse(GLFWwindow* window, int mouseBtn, triggerManager* trigger)
+void processInput_event_mouse(GLFWwindow* window, int mouseBtn, TriggerManager* trigger)
 {
 	trigger->changeState(glfwGetMouseButton(window, mouseBtn) == GLFW_PRESS);
 }

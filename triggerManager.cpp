@@ -1,27 +1,27 @@
-#include "triggerManager.h"
+#include "TriggerManager.h"
 
-triggerManager::triggerManager(bool init)
+TriggerManager::TriggerManager(bool init)
 {
 	this->curState = init;
 }
 
-void triggerManager::setTrigger(std::function<void(bool)> triggerEvent)
+void TriggerManager::setTrigger(std::function<void(bool)> triggerEvent)
 {
 	this->triggerEvent = triggerEvent;
 }
 
-bool triggerManager::getState()
+bool TriggerManager::getState()
 {
 	return curState;
 }
 
-void triggerManager::changeState(bool newState)
+void TriggerManager::changeState(bool newState)
 {
 	checkState(newState);
 	curState = newState;
 }
 
-void  triggerManager::checkState(bool newState) {
+void  TriggerManager::checkState(bool newState) {
 	if (newState != curState)
 	{
 		triggerEvent(curState);
