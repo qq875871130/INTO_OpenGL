@@ -143,6 +143,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="GLBaseProgram.cpp" />
+    <ClCompile Include="HelloTrangle.cpp" />
+    <ClCompile Include="HelloWindow.cpp" />
     <ClCompile Include="Tools.cpp" />
     <ClCompile Include="practice.cpp" />
     <ClCompile Include="test.cpp" />
@@ -152,6 +154,8 @@
   <ItemGroup>
     <ClInclude Include="dataStruct.h" />
     <ClInclude Include="GLBaseProgram.h" />
+    <ClInclude Include="HelloTrangle.h" />
+    <ClInclude Include="HelloWindow.h" />
     <ClInclude Include="Tools.h" />
     <ClInclude Include="practice.h" />
     <ClInclude Include="resource.h" />

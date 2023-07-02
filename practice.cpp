@@ -289,7 +289,7 @@
 //	unsigned int EBO;
 //
 //	//Create flag switcher 
-//	TriggerManager* msBtnFlags = new TriggerManager(false);
+//	triggerManager* msBtnFlags = new triggerManager(false);
 //
 //	//Create shader program
 //	unsigned int shaderProgram1;

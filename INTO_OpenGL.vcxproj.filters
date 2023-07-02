@@ -16,14 +16,14 @@
     <Filter Include="源文件\lib">
       <UniqueIdentifier>{57aa36ba-4110-42e9-aac4-761384ca5281}</UniqueIdentifier>
     </Filter>
-    <Filter Include="源文件\tools">
-      <UniqueIdentifier>{64140ad5-82cb-454b-8b3d-bb0394b7fac6}</UniqueIdentifier>
-    </Filter>
     <Filter Include="源文件\tutorial">
       <UniqueIdentifier>{e856ad6b-73c2-4569-967f-a1bd3cce08aa}</UniqueIdentifier>
     </Filter>
     <Filter Include="源文件\tutorial\start">
       <UniqueIdentifier>{40706cc8-80c0-44ea-9497-51d074f34a68}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\tools">
+      <UniqueIdentifier>{64140ad5-82cb-454b-8b3d-bb0394b7fac6}</UniqueIdentifier>
     </Filter>
     <Filter Include="源文件\tools\base">
       <UniqueIdentifier>{d93b4221-7da3-4612-9a14-dc270bc9fc54}</UniqueIdentifier>
@@ -36,17 +36,23 @@
     <ClCompile Include="TriggerManager.cpp">
       <Filter>源文件\tools</Filter>
     </ClCompile>
-    <ClCompile Include="practice.cpp">
-      <Filter>源文件\tutorial\start</Filter>
-    </ClCompile>
-    <ClCompile Include="test.cpp">
-      <Filter>源文件\tutorial\start</Filter>
-    </ClCompile>
     <ClCompile Include="GLBaseProgram.cpp">
       <Filter>源文件\tools\base</Filter>
     </ClCompile>
     <ClCompile Include="Tools.cpp">
       <Filter>源文件\tools</Filter>
+    </ClCompile>
+    <ClCompile Include="practice.cpp">
+      <Filter>源文件\tutorial</Filter>
+    </ClCompile>
+    <ClCompile Include="test.cpp">
+      <Filter>源文件\tutorial</Filter>
+    </ClCompile>
+    <ClCompile Include="HelloTrangle.cpp">
+      <Filter>源文件\tutorial\start</Filter>
+    </ClCompile>
+    <ClCompile Include="HelloWindow.cpp">
+      <Filter>源文件\tutorial\start</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -69,6 +75,12 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="resource.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="HelloTrangle.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="HelloWindow.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
