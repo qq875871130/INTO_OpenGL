@@ -1,5 +1,5 @@
 #include "GLBaseProgram.h"
-
+using namespace cv_gl_tools;
 
 GLBaseProgram::GLBaseProgram()
 {
@@ -19,7 +19,19 @@ GLBaseProgram::~GLBaseProgram()
 
 int GLBaseProgram::run()
 {
-	glfwInit();
+	init_profile();
+	if (init_context() == 0)
+	{
+		init_other();
+		while (!glfwWindowShouldClose(window)) {
+			loop_input();
+			loop_render();
+			loop_apply();
+		}
+		destroy();
+		return 0;
+	}
+	return -1;
 }
 
 int  GLBaseProgram::init_profile()
@@ -76,6 +88,13 @@ void  GLBaseProgram::loop_render()
 	glPolygonMode(render_polygon_face, render_polygon_mode);
 	glClearColor(window_clear_color.x, window_clear_color.y, window_clear_color.z, window_clear_color.w);
 	glClear(window_clear_field);
+}
+
+void GLBaseProgram::loop_apply()
+{
+	//Checking and Swap Buffer
+	glfwSwapBuffers(window);
+	glfwPollEvents();
 }
 
 void  GLBaseProgram::destroy()

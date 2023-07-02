@@ -142,15 +142,24 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="GLBaseProgram.cpp" />
+    <ClCompile Include="Tools.cpp" />
     <ClCompile Include="practice.cpp" />
     <ClCompile Include="test.cpp" />
     <ClCompile Include="src\glad.c" />
-    <ClCompile Include="triggerManager.cpp" />
+    <ClCompile Include="TriggerManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="dataStruct.h" />
+    <ClInclude Include="GLBaseProgram.h" />
+    <ClInclude Include="Tools.h" />
     <ClInclude Include="practice.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="test.h" />
-    <ClInclude Include="triggerManager.h" />
+    <ClInclude Include="TriggerManager.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="INTO_OpenGL.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

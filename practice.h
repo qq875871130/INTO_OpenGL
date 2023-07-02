@@ -8,8 +8,8 @@ class practice
 {
 };
 
-int helloTrangle_practice1();
-
-int helloTrangle_practice2();
-
-int helloTrangle_practice3();
+//int helloTrangle_practice1();
+//
+//int helloTrangle_practice2();
+//
+//int helloTrangle_practice3();

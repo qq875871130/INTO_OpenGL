@@ -7,7 +7,6 @@
 #include "dataStruct.h"
 #include "Tools.h"
 #include "triggerManager.h"
-using namespace cv_gl_tools;
 
 class GLBaseProgram
 {
@@ -37,6 +36,7 @@ protected:
 	virtual int init_other();
 	virtual void loop_input();
 	virtual void loop_render();
+	virtual void loop_apply();
 	virtual void destroy();
 
 public:
