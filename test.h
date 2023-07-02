@@ -9,8 +9,12 @@
 #include <functional>
 #include "practice.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "Tools.h"
 >>>>>>> e49752da7bc786b0cb381c50a45ff614fcbe40b9
+=======
+#include "triggerManager.h"
+>>>>>>> parent of e49752d (Initially complete window and trangle glProgram base class test)
 =======
 #include "triggerManager.h"
 >>>>>>> parent of e49752d (Initially complete window and trangle glProgram base class test)

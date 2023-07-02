@@ -16,6 +16,7 @@
   </ItemGroup>
   <ItemGroup>
 <<<<<<< HEAD
+<<<<<<< HEAD
     <ClCompile Include="src\glad.c">
       <Filter>源文件\lib</Filter>
 <<<<<<< HEAD
@@ -28,10 +29,16 @@
       <Filter>源文件</Filter>
 >>>>>>> parent of e49752d (Initially complete window and trangle glProgram base class test)
     </ClCompile>
+=======
+    <ClCompile Include="test.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+>>>>>>> parent of e49752d (Initially complete window and trangle glProgram base class test)
     <ClCompile Include="src\glad.c">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="practice.cpp">
+<<<<<<< HEAD
 <<<<<<< HEAD
       <Filter>源文件\tutorial\start</Filter>
     </ClCompile>
@@ -65,6 +72,12 @@
     <ClCompile Include="triggerManager.cpp">
       <Filter>源文件</Filter>
 >>>>>>> parent of e49752d (Initially complete window and trangle glProgram base class test)
+=======
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="triggerManager.cpp">
+      <Filter>源文件</Filter>
+>>>>>>> parent of e49752d (Initially complete window and trangle glProgram base class test)
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -74,6 +87,7 @@
     <ClInclude Include="practice.h">
       <Filter>头文件</Filter>
     </ClInclude>
+<<<<<<< HEAD
 <<<<<<< HEAD
     <ClInclude Include="TriggerManager.h">
 <<<<<<< HEAD
@@ -116,6 +130,11 @@
     <ResourceCompile Include="INTO_OpenGL.rc">
       <Filter>资源文件</Filter>
     </ResourceCompile>
+=======
+    <ClInclude Include="triggerManager.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+>>>>>>> parent of e49752d (Initially complete window and trangle glProgram base class test)
 =======
     <ClInclude Include="triggerManager.h">
       <Filter>头文件</Filter>

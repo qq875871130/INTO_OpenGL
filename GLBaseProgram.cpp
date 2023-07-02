@@ -21,6 +21,7 @@ GLBaseProgram::~GLBaseProgram()
 int GLBaseProgram::run()
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	init_profile();
 	if (init_context() == 0)
 	{
@@ -48,6 +49,9 @@ void GLBaseProgram::set_contextVersion(int min, int max)
 {
 	context_version_min = min;
 	context_version_max = max;
+=======
+	glfwInit();
+>>>>>>> parent of e49752d (Initially complete window and trangle glProgram base class test)
 }
 
 void GLBaseProgram::set_window(int width, int heigth, const char* title = "LearnOpenGL")

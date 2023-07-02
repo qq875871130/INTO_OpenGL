@@ -142,6 +142,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <<<<<<< HEAD
     <ClCompile Include="GLBaseProgram.cpp" />
     <<<<<<< HEAD
@@ -152,12 +153,15 @@
     <ClCompile Include="Tools.cpp" />
     =======
     >>>>>>> parent of e49752d (Initially complete window and trangle glProgram base class test)
+=======
+>>>>>>> parent of e49752d (Initially complete window and trangle glProgram base class test)
     <ClCompile Include="practice.cpp" />
     <ClCompile Include="test.cpp" />
     <ClCompile Include="src\glad.c" />
     <ClCompile Include="triggerManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <<<<<<< HEAD
     <ClInclude Include="dataStruct.h" />
     <ClInclude Include="GLBaseProgram.h" />
@@ -169,6 +173,8 @@
     <ClInclude Include="Tools.h" />
     =======
     >>>>>>> parent of e49752d (Initially complete window and trangle glProgram base class test)
+=======
+>>>>>>> parent of e49752d (Initially complete window and trangle glProgram base class test)
     <ClInclude Include="practice.h" />
     <ClInclude Include="test.h" />
     <ClInclude Include="triggerManager.h" />
