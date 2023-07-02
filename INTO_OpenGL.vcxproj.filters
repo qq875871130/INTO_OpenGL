@@ -36,17 +36,23 @@
     <ClCompile Include="TriggerManager.cpp">
       <Filter>源文件\tools</Filter>
     </ClCompile>
-    <ClCompile Include="practice.cpp">
-      <Filter>源文件\tutorial\start</Filter>
-    </ClCompile>
-    <ClCompile Include="test.cpp">
-      <Filter>源文件\tutorial\start</Filter>
-    </ClCompile>
     <ClCompile Include="GLBaseProgram.cpp">
       <Filter>源文件\tools\base</Filter>
     </ClCompile>
     <ClCompile Include="Tools.cpp">
       <Filter>源文件\tools</Filter>
+    </ClCompile>
+    <ClCompile Include="HelloTrangle.cpp">
+      <Filter>源文件\tutorial\start</Filter>
+    </ClCompile>
+    <ClCompile Include="HelloWindow.cpp">
+      <Filter>源文件\tutorial\start</Filter>
+    </ClCompile>
+    <ClCompile Include="practice.cpp">
+      <Filter>源文件\tutorial</Filter>
+    </ClCompile>
+    <ClCompile Include="test.cpp">
+      <Filter>源文件\tutorial</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -69,6 +75,12 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="resource.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="HelloTrangle.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="HelloWindow.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

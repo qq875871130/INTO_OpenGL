@@ -3,6 +3,7 @@
 #include <GLFW/glfw3.h>
 #include <iostream>
 #include <functional>
+#include "dataStruct.h"
 #include "TriggerManager.h"
 #include "GLBaseProgram.h"
 

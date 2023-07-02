@@ -17,6 +17,7 @@ GLBaseProgram::~GLBaseProgram()
 	}
 }
 
+
 int GLBaseProgram::run()
 {
 	init_profile();
@@ -34,6 +35,45 @@ int GLBaseProgram::run()
 	return -1;
 }
 
+
+#pragma region Configurable
+void GLBaseProgram::set_profile(bool coreMode)
+{
+	profile_core = coreMode;
+}
+
+void GLBaseProgram::set_contextVersion(int min, int max)
+{
+	context_version_min = min;
+	context_version_max = max;
+}
+
+void GLBaseProgram::set_window(int width, int heigth, const char* title = "LearnOpenGL")
+{
+	window_width = width;
+	window_heigth = heigth;
+	window_title = title;
+}
+
+void GLBaseProgram::set_window(GLFWmonitor* monitor, GLFWwindow* share)
+{
+	window_monitor = monitor;
+	window_share = share;
+}
+
+void GLBaseProgram::set_field(GLbitfield clearBit)
+{
+	window_clear_field = clearBit;
+}
+
+void GLBaseProgram::set_field_color(vec4<float> clearColor)
+{
+	window_clear_color = clearColor;
+}
+#pragma endregion
+
+
+#pragma region Virtualizable
 int  GLBaseProgram::init_profile()
 {
 	glfwInit();
@@ -102,4 +142,6 @@ void  GLBaseProgram::destroy()
 	//Render Terminate
 	glfwTerminate();
 }
+
+#pragma endregion
 

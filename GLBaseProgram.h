@@ -1,12 +1,5 @@
 #pragma once
-#include <glad/glad.h>
-#include <GLFW/glfw3.h>
-#include <iostream>
-#include <functional>
-#include "practice.h"
-#include "dataStruct.h"
 #include "Tools.h"
-#include "triggerManager.h"
 
 class GLBaseProgram
 {
@@ -42,6 +35,12 @@ protected:
 public:
 	GLBaseProgram();
 	~GLBaseProgram();
+	void set_profile(bool coreMode);
+	void set_contextVersion(int min, int max);
+	void set_window(int width, int heigth, const char* title);
+	void set_window(GLFWmonitor* monitor, GLFWwindow* share);
+	void set_field(GLbitfield clearBit);
+	void set_field_color(vec4<float> clearColor);
 	virtual int run();
 };
 
