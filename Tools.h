@@ -4,8 +4,6 @@
 #include <iostream>
 #include <functional>
 #include "TriggerManager.h"
-#include "GLBaseProgram.h"
-
 namespace cv_gl_tools {
 	void processInput_key_press(GLFWwindow* window, int key, std::function<void()> pressEvent);
 	void processInput_key_up(GLFWwindow* window, int key, std::function<void()> pressEvent);

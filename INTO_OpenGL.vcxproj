@@ -142,24 +142,36 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <<<<<<< HEAD
     <ClCompile Include="GLBaseProgram.cpp" />
+    <<<<<<< HEAD
+    <ClCompile Include="HelloTrangle.cpp" />
+    <ClCompile Include="HelloWindow.cpp" />
+    =======
+    >>>>>>> e49752da7bc786b0cb381c50a45ff614fcbe40b9
     <ClCompile Include="Tools.cpp" />
+    =======
+    >>>>>>> parent of e49752d (Initially complete window and trangle glProgram base class test)
     <ClCompile Include="practice.cpp" />
     <ClCompile Include="test.cpp" />
     <ClCompile Include="src\glad.c" />
-    <ClCompile Include="TriggerManager.cpp" />
+    <ClCompile Include="triggerManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <<<<<<< HEAD
     <ClInclude Include="dataStruct.h" />
     <ClInclude Include="GLBaseProgram.h" />
+    <<<<<<< HEAD
+    <ClInclude Include="HelloTrangle.h" />
+    <ClInclude Include="HelloWindow.h" />
+    =======
+    >>>>>>> e49752da7bc786b0cb381c50a45ff614fcbe40b9
     <ClInclude Include="Tools.h" />
+    =======
+    >>>>>>> parent of e49752d (Initially complete window and trangle glProgram base class test)
     <ClInclude Include="practice.h" />
-    <ClInclude Include="resource.h" />
     <ClInclude Include="test.h" />
-    <ClInclude Include="TriggerManager.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="INTO_OpenGL.rc" />
+    <ClInclude Include="triggerManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

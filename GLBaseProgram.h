@@ -7,6 +7,7 @@
 #include "dataStruct.h"
 #include "Tools.h"
 #include "triggerManager.h"
+using namespace cv_gl_tools;
 
 class GLBaseProgram
 {
@@ -36,12 +37,17 @@ protected:
 	virtual int init_other();
 	virtual void loop_input();
 	virtual void loop_render();
-	virtual void loop_apply();
 	virtual void destroy();
 
 public:
 	GLBaseProgram();
 	~GLBaseProgram();
+	void set_profile(bool coreMode);
+	void set_contextVersion(int min, int max);
+	void set_window(int width, int heigth, const char* title);
+	void set_window(GLFWmonitor* monitor, GLFWwindow* share);
+	void set_field(GLbitfield clearBit);
+	void set_field_color(vec4<float> clearColor);
 	virtual int run();
 };
 
