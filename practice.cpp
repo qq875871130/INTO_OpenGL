@@ -1,6 +1,5 @@
-#include "test.h"
+#include "main.h"
 #include "practice.h"
-#include "triggerManager.h"
 
 //int helloTrangle_practice1() {
 //#pragma region Hard-encode GLSL

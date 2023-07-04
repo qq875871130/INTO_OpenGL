@@ -33,19 +33,13 @@
     <ClCompile Include="src\glad.c">
       <Filter>源文件\lib</Filter>
     </ClCompile>
-    <ClCompile Include="TriggerManager.cpp">
-      <Filter>源文件\tools</Filter>
-    </ClCompile>
-    <ClCompile Include="GLBaseProgram.cpp">
-      <Filter>源文件\tools\base</Filter>
-    </ClCompile>
     <ClCompile Include="Tools.cpp">
       <Filter>源文件\tools</Filter>
     </ClCompile>
     <ClCompile Include="practice.cpp">
       <Filter>源文件\tutorial</Filter>
     </ClCompile>
-    <ClCompile Include="test.cpp">
+    <ClCompile Include="main.cpp">
       <Filter>源文件\tutorial</Filter>
     </ClCompile>
     <ClCompile Include="HelloTrangle.cpp">
@@ -54,18 +48,18 @@
     <ClCompile Include="HelloWindow.cpp">
       <Filter>源文件\tutorial\start</Filter>
     </ClCompile>
+    <ClCompile Include="Utils.cpp">
+      <Filter>源文件\tools</Filter>
+    </ClCompile>
+    <ClCompile Include="GLBase.cpp">
+      <Filter>源文件\tools\base</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="test.h">
+    <ClInclude Include="main.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="practice.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="TriggerManager.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="GLBaseProgram.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="Tools.h">
@@ -81,6 +75,15 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="HelloWindow.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="GLBase.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="lib.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

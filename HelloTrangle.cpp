@@ -2,7 +2,7 @@
 
 int HelloTrangle::init_other()
 {
-	GLBaseProgram::init_other();
+	Program::init_other();
 
 	float vertices[] = {
 		-0.5f, -0.5f, 0.0f,
@@ -96,7 +96,7 @@ int HelloTrangle::init_other()
 
 void HelloTrangle::loop_render()
 {
-	GLBaseProgram::loop_render();
+	Program::loop_render();
 	//Activate program
 	glUseProgram(shaderProgram);
 	glBindVertexArray(VAO);
@@ -113,7 +113,7 @@ void HelloTrangle::destroy()
 	glDeleteBuffers(1, &VBO);
 	glDeleteBuffers(1, &EBO);
 	glDeleteProgram(shaderProgram);
-	GLBaseProgram::destroy();
+	Program::destroy();
 }
 
 int HelloTrangle::start()

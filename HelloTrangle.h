@@ -1,11 +1,9 @@
 #pragma once
-#include "Tools.h"
-#define GL_VBO 0
-#define GL_VAO 1
-#define GL_EBO 2
+#include "lib.h"
+#include "GLBase.h"
 
 
-class HelloTrangle :GLBaseProgram
+class HelloTrangle :Program
 {
 private:
 #pragma region Hard-encode GLSL
@@ -23,9 +21,6 @@ private:
 		"}\0";
 #pragma endregion
 
-	//Render data
-	float* vertices;
-	unsigned int* indices;
 
 	unsigned int VBO;
 	unsigned int VAO;

@@ -142,25 +142,26 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="GLBaseProgram.cpp" />
+    <ClCompile Include="GLBase.cpp" />
     <ClCompile Include="HelloTrangle.cpp" />
     <ClCompile Include="HelloWindow.cpp" />
     <ClCompile Include="Tools.cpp" />
     <ClCompile Include="practice.cpp" />
-    <ClCompile Include="test.cpp" />
+    <ClCompile Include="main.cpp" />
     <ClCompile Include="src\glad.c" />
-    <ClCompile Include="TriggerManager.cpp" />
+    <ClCompile Include="Utils.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="dataStruct.h" />
-    <ClInclude Include="GLBaseProgram.h" />
+    <ClInclude Include="GLBase.h" />
     <ClInclude Include="HelloTrangle.h" />
     <ClInclude Include="HelloWindow.h" />
+    <ClInclude Include="lib.h" />
     <ClInclude Include="Tools.h" />
     <ClInclude Include="practice.h" />
     <ClInclude Include="resource.h" />
-    <ClInclude Include="test.h" />
-    <ClInclude Include="TriggerManager.h" />
+    <ClInclude Include="main.h" />
+    <ClInclude Include="Utils.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="INTO_OpenGL.rc" />

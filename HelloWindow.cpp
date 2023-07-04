@@ -2,7 +2,7 @@
 
 int HelloWindow::start()
 {
-	GLBaseProgram* base = new GLBaseProgram();
+	Program* base = new Program();
 	int result = base->run();
 
 	delete(base);

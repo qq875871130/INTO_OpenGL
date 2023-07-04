@@ -1,4 +1,5 @@
 #include "Tools.h"
+
 void cv_gl_tools::processInput_key_press(GLFWwindow* window, int key, std::function<void()> pressEvent)
 {
 	if (glfwGetKey(window, key) == GLFW_PRESS)
