@@ -54,6 +54,9 @@
     <ClCompile Include="GLBase.cpp">
       <Filter>源文件\tools\base</Filter>
     </ClCompile>
+    <ClCompile Include="Perfabs.cpp">
+      <Filter>源文件\tools</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -84,6 +87,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="lib.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Perfabs.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

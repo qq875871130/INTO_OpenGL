@@ -1,5 +1,6 @@
 #include "Utils.h"
 
+#pragma region TriggerManager
 TriggerManager::TriggerManager(bool init)
 {
 	this->curState = init;
@@ -27,4 +28,6 @@ void  TriggerManager::checkState(bool newState) {
 		triggerEvent(curState);
 	}
 }
+#pragma endregion
+
 

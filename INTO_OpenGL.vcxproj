@@ -145,6 +145,7 @@
     <ClCompile Include="GLBase.cpp" />
     <ClCompile Include="HelloTrangle.cpp" />
     <ClCompile Include="HelloWindow.cpp" />
+    <ClCompile Include="Perfabs.cpp" />
     <ClCompile Include="Tools.cpp" />
     <ClCompile Include="practice.cpp" />
     <ClCompile Include="main.cpp" />
@@ -157,6 +158,7 @@
     <ClInclude Include="HelloTrangle.h" />
     <ClInclude Include="HelloWindow.h" />
     <ClInclude Include="lib.h" />
+    <ClInclude Include="Perfabs.h" />
     <ClInclude Include="Tools.h" />
     <ClInclude Include="practice.h" />
     <ClInclude Include="resource.h" />

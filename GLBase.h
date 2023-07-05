@@ -50,13 +50,19 @@ class RPObject
 {
 public:
 	RPObject();
-
+	virtual void gen(int) = 0;
+	virtual void bind() = 0;
+	virtual void unbind() = 0;
+	virtual void draw() = 0;
+	virtual void destory(int) = 0;
+protected:
+	unsigned int rpo;
 };
 
-class RPObjContext
+class RPContext
 {
 public:
-	RPObjContext(int, RPObject*);
+	RPContext(int, RPObject*);
 
 private:
 	RPObject* strategy;

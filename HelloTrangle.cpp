@@ -101,10 +101,9 @@ void HelloTrangle::loop_render()
 	glUseProgram(shaderProgram);
 	glBindVertexArray(VAO);
 	//Draw
-	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+	glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, 0);
 	//Unbind
 	glBindVertexArray(0);
-
 }
 
 void HelloTrangle::destroy()

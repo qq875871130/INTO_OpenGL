@@ -151,7 +151,7 @@ void  Program::destroy()
 
 #pragma endregion
 
-RPObjContext::RPObjContext(int objID, RPObject* strategy)
+RPContext::RPContext(int objID, RPObject* strategy)
 {
 	switch (objID)
 	{
@@ -168,4 +168,5 @@ RPObjContext::RPObjContext(int objID, RPObject* strategy)
 
 RPObject::RPObject()
 {
+
 }
