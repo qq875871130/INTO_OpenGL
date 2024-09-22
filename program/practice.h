@@ -4,8 +4,15 @@
 #include <iostream>
 #include <functional>
 
-class practice
+class Practice
 {
+    class HelloTrianglePractice1 : HelloTriangle
+    {
+    protected:
+        int InitOther() override;
+        void LoopRender() override;
+        void Destroy() override;
+    };
 };
 
 int helloTrangle_practice1();

@@ -1,10 +1,9 @@
 #include "HelloWindow.h"
 
-int HelloWindow::start()
+int HelloWindow::Start()
 {
 	Program* base = new Program();
-	int result = base->run();
+	int result = base->Run();
 
-	delete(base);
 	return result;
 }

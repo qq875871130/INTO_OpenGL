@@ -1,7 +1,7 @@
 #include "main.h"
 
 int main() {
-	return HelloTrangle::start();
+	return HelloTriangle::Start();
 }
 
 

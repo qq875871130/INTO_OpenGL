@@ -5,6 +5,6 @@
 class HelloWindow
 {
 public:
-	static int start();
+	static int Start();
 };
 

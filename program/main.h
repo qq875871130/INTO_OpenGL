@@ -1,6 +1,6 @@
 #pragma once
 #include "HelloWindow.h"
-#include "HelloTrangle.h"
+#include "HelloTriangle.h"
 
 
 int main();

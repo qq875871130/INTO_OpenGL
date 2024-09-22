@@ -10,44 +10,44 @@ VBO::~VBO()
 {
 }
 
-void VBO::set_data_buffer(GLsizeiptr size, const void* vertexes, GLenum drawType)
+void VBO::SetDataBuffer(GLsizeiptr size, const void* vertexes, GLenum drawType)
 {
 	buffer_size_vertexes = size;
 	buffer_vertexes = vertexes;
 	draw_type = drawType;
 }
 
-void VBO::set_data_draw(GLint vFirst = 0, GLsizei vCount = 3, GLenum primType = GL_TRIANGLES)
+void VBO::SetDataDraw(GLint vFirst = 0, GLsizei vCount = 3, GLenum primType = GL_TRIANGLES)
 {
 	vertexes_index_first = vFirst;
 	vertexes_count = vCount;
 	prim_type = primType;
 }
 
-void VBO::gen(int num)
+void VBO::Gen(int num)
 {
 	glGenBuffers(num, &rpo);
 }
 
-void VBO::bind()
+void VBO::Bind()
 {
 	glBindBuffer(GL_ARRAY_BUFFER, rpo);
 	glBufferData(GL_ARRAY_BUFFER, buffer_size_vertexes, buffer_vertexes, draw_type);
 }
 
-void VBO::unbind()
+void VBO::Unbind()
 {
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
-void VBO::draw()
+void VBO::Draw()
 {
-	bind();
+	Bind();
 	glDrawArrays(prim_type, vertexes_index_first, vertexes_count);
-	unbind();
+	Unbind();
 }
 
-void VBO::destory(int n)
+void VBO::Destroy(int n)
 {
 	glDeleteBuffers(n, &rpo);
 }
@@ -67,47 +67,47 @@ VAO::~VAO()
 	delete(vbo);
 }
 
-void VAO::set_data_buffer(GLsizeiptr size, const void* vertexes, GLenum drawType)
+void VAO::SetDataBuffer(GLsizeiptr size, const void* vertexes, GLenum drawType)
 {
-	vbo->set_data_buffer(size, vertexes, drawType);
+	vbo->SetDataBuffer(size, vertexes, drawType);
 }
 
-void VAO::set_data_draw(GLint vFirst = 0, GLsizei vCount = 3, GLenum primType = GL_TRIANGLES)
+void VAO::SetDataDraw(GLint vFirst = 0, GLsizei vCount = 3, GLenum primType)
 {
 	vertexes_index_first = vFirst;
 	vertexes_count = vCount;
 	prim_type = primType;
 }
 
-void VAO::gen(int num)
+void VAO::Gen(int num)
 {
 	glGenVertexArrays(num, &rpo);
-	vbo->gen(num);
+	vbo->Gen(num);
 }
 
-void VAO::bind()
+void VAO::Bind()
 {
 	glBindVertexArray(rpo);
-	vbo->bind();
+	vbo->Bind();
 }
 
-void VAO::unbind()
+void VAO::Unbind()
 {
 	glBindVertexArray(0);
-	vbo->unbind();
+	vbo->Unbind();
 }
 
-void VAO::draw()
+void VAO::Draw()
 {
 	glBindVertexArray(rpo);
 	glDrawArrays(prim_type, vertexes_index_first, vertexes_count);
-	unbind();
+	Unbind();
 }
 
-void VAO::destory(int n)
+void VAO::Destroy(int n)
 {
 	glDeleteVertexArrays(n, &rpo);
-	vbo->destory(n);
+	vbo->Destroy(n);
 }
 #pragma endregion
 
@@ -122,15 +122,15 @@ EBO::~EBO()
 	delete(vao);
 }
 
-void EBO::set_data_buffer(GLsizeiptr size_vertexes, const void* vertexes, GLsizeiptr size_indices, const void* indices, GLenum drawType = GL_STATIC_DRAW)
+void EBO::SetDataBuffer(GLsizeiptr size_vertexes, const void* vertexes, GLsizeiptr size_indices, const void* indices, GLenum drawType)
 {
 	indices_buffer_size = size_indices;
 	indices_buffer = indices;
 	type_draw = drawType;
-	vao->set_data_buffer(size_vertexes, vertexes, drawType);
+	vao->SetDataBuffer(size_vertexes, vertexes, drawType);
 }
 
-void EBO::set_data_draw(const void* iOffset, GLsizei iCount, GLenum iType = GL_UNSIGNED_INT, GLenum primType = GL_TRIANGLES)
+void EBO::SetDataDraw(const void* iOffset, GLsizei iCount, GLenum iType, GLenum primType)
 {
 	type_prim = primType;
 	type_indices = iType;
@@ -138,36 +138,36 @@ void EBO::set_data_draw(const void* iOffset, GLsizei iCount, GLenum iType = GL_U
 	vertexes_count = iCount;
 }
 
-void EBO::gen(int num)
+void EBO::Gen(int num)
 {
 	glGenBuffers(num, &rpo);
-	vao->gen(num);
+	vao->Gen(num);
 }
 
-void EBO::bind()
+void EBO::Bind()
 {
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, rpo);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices_buffer), indices_buffer, type_draw);
-	vao->bind();
+	vao->Bind();
 }
 
-void EBO::unbind()
+void EBO::Unbind()
 {
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-	vao->unbind();
+	vao->Unbind();
 }
 
-void EBO::draw()
+void EBO::Draw()
 {
-	vao->bind();
+	vao->Bind();
 	glDrawElements(type_prim, vertexes_count, type_indices, vertexes_offset);
-	vao->unbind();
+	vao->Unbind();
 }
 
-void EBO::destory(int n)
+void EBO::Destroy(int n)
 {
 	glDeleteBuffers(n, &rpo);
-	vao->destory(n);
+	vao->Destroy(n);
 }
 #pragma endregion
 
