@@ -219,19 +219,23 @@ void EBO::Bind(int i, GLsizeiptr vSize, const void* vertexes,
 
 void EBO::Unbind()
 {
-	// glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 	vao->Unbind();
 }
 
 void EBO::Draw()
 {
-	unsigned int vaoId = 0;
-	unsigned int vboId = 0;
-	vao->Get(&vaoId, &vboId);
-
-	glBindVertexArray(vaoId);
-	glDrawElements(type_prim, vertexes_count, type_indices, vertexes_offset);
-	glBindVertexArray(0);
+	for (int i = 0; i < static_cast<int>(rpo.size()); i++)
+	{
+		unsigned int vaoId = 0;
+		unsigned int vboId = 0;
+		vao->Get(&vaoId, &vboId, i);
+		
+		glBindVertexArray(vaoId);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, rpo[i]);
+		glDrawElements(type_prim, vertexes_count, type_indices, vertexes_offset);
+		Unbind();
+	}
 }
 
 void EBO::Draw(int i) const
@@ -241,8 +245,10 @@ void EBO::Draw(int i) const
 	vao->Get(&vaoId, &vboId, i);
 
 	glBindVertexArray(vaoId);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, rpo[i]);
 	glDrawElements(type_prim, vertexes_count, type_indices, vertexes_offset);
-	glBindVertexArray(0);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+	vao->Unbind();
 }
 
 void EBO::Destroy(int n)

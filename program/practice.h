@@ -17,11 +17,6 @@ namespace Practice
         GLsizei DrawCount = 3;
         GLenum PrimType = GL_TRIANGLES;
 
-        unsigned int shaderProgram = 0;
-        unsigned int vao = 0;
-        unsigned int vbo = 0;
-        unsigned int ebo = 0;
-
         HelloTrianglePractice1(ERpoType rpoStrategy, const std::vector<float>& vertices, const std::vector<unsigned int>& indices)
             : Vertices(vertices),
               Indices(indices)
@@ -58,6 +53,97 @@ namespace Practice
             base->SetProfile(rpoStrategy != ERpoType::Vbo);
             base->DrawCount = DrawCount;
             return base->Run();
+        }
+
+        static int Start()
+        {
+            std::vector<float> vertices
+            {
+                /*2 connected triangle (EBO)*/
+                // 0.0f, 0.0f, 0.0f,
+                // -0.5f, 0.5f, 0.0f,
+                // -0.5f, -0.5f, 0.0f,
+                // 0.5f, 0.5f, 0.0f,
+                // 0.5f, -0.5f, 0.0f,
+
+                /*2 connected triangle (VAO)*/
+                0.0f, 0.0f, 0.0f,
+                -0.5f, 0.5f, 0.0f,
+                -0.5f, -0.5f, 0.0f,
+                0.0f, 0.0f, 0.0f,
+                0.5f, 0.5f, 0.0f,
+                0.5f, -0.5f, 0.0f,
+            };
+
+            return Start(ERpoType::Vao, vertices, 6, std::vector<unsigned int>());
+        }
+    };
+
+    class HelloTrianglePractice2 : Program
+    {
+    public:
+        std::vector<float> Vertices1;
+        std::vector<float> Vertices2;
+
+    private:
+        RpoContext* Context;
+        GLenum PrimType = GL_TRIANGLES;
+
+    public:
+        HelloTrianglePractice2()
+            : Context(new RpoContext(ERpoType::Vao))
+        {
+        }
+
+        ~HelloTrianglePractice2() override { delete Context; }
+
+    private:
+        const char* vertexShaderSource = "#version 460 core\n"
+            "layout (location = 0) in vec3 aPos;\n"
+            "void main()\n"
+            "{\n"
+            "   gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
+            "}\0";
+
+        const char* fragmentShaderSource = "#version 460 core\n"
+            "out vec4 FragColor;\n"
+            "void main()\n"
+            "{\n"
+            "   FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);\n"
+            "}\0";
+
+    protected:
+        int InitOther() override;
+        void LoopRender() override;
+        void Destroy() override;
+
+    public:
+        static int Start(const std::vector<float>& vertices1, const std::vector<float>& vertices2, GLenum primType)
+        {
+            const auto base = new HelloTrianglePractice2();
+            base->Vertices1 = vertices1;
+            base->Vertices2 = vertices2;
+            base->PrimType = primType;
+            return base->Run();
+        }
+
+        static int Start()
+        {
+            std::vector<float> vertices1
+            {
+                0.0f, 0.0f, 0.0f,
+                -0.4f, 0.8f, 0.0f,
+                -0.8f, 0.0f, 0.0f,
+            };
+            
+            std::vector<float> vertices2
+            {
+                0.0f, 0.0f, 0.0f,
+                0.8f, 0.0f, 0.0f,
+                0.4f, -0.8f, 0.0f,
+            };
+
+            return Start(vertices1, vertices2, GL_TRIANGLES);
         }
     };
 };

@@ -31,7 +31,7 @@ int main() {
 	};
 
 	// return HelloTriangle::Start();
-	return Practice::HelloTrianglePractice1::Start(ERpoType::Ebo, vertices, 6, indices);
+	return Practice::HelloTrianglePractice2::Start();
 }
 
 

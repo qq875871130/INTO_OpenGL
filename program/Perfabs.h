@@ -168,6 +168,20 @@ public:
 		else if (RpoStrategy == ERpoType::Vao) GetRpo<VAO>()->SetDataDraw(first, count, primType);
 		else GetRpo<VBO>()->SetDataDraw(first, count, primType);
 	}
+
+	void BindByIndex(int i, GLsizeiptr vSize, const void* vertexes, GLsizeiptr iSize, const void* indices, GLenum drawType) const
+	{
+		if (RpoStrategy == ERpoType::Ebo) GetRpo<EBO>()->Bind(i, vSize, vertexes, iSize, indices, drawType);
+		else if (RpoStrategy == ERpoType::Vao) GetRpo<VAO>()->Bind(i, vSize, vertexes, drawType);
+		else GetRpo<VBO>()->Bind(i, vSize, vertexes, drawType);
+	}
+
+	void DrawByIndex(int i) const
+	{
+		if (RpoStrategy == ERpoType::Ebo) GetRpo<EBO>()->Draw(i);
+		else if (RpoStrategy == ERpoType::Vao) GetRpo<VAO>()->Draw(i);
+		else GetRpo<VBO>()->Draw(i);
+	}
 	
 	//Create, compile and attach shader to program
 	void InitShaderProgram(const char* vShaderSource, const char* fShaderSource)
