@@ -1,14 +1,8 @@
 #include "Perfabs.h"
 
+#include <vector>
+
 #pragma region VBO
-
-VBO::VBO()
-{
-}
-
-VBO::~VBO()
-{
-}
 
 void VBO::SetDataBuffer(GLsizeiptr size, const void* vertexes, GLenum drawType)
 {
@@ -26,30 +20,63 @@ void VBO::SetDataDraw(GLint vFirst = 0, GLsizei vCount = 3, GLenum primType = GL
 
 void VBO::Gen(int num)
 {
-	glGenBuffers(num, &rpo);
+	rpo = std::vector<unsigned int>(num);
+	glGenBuffers(num, rpo.data());
 }
 
 void VBO::Bind()
 {
-	glBindBuffer(GL_ARRAY_BUFFER, rpo);
-	glBufferData(GL_ARRAY_BUFFER, buffer_size_vertexes, buffer_vertexes, draw_type);
+	for (auto o : rpo)
+	{
+		glBindVertexArray(o);
+		glBindBuffer(GL_ARRAY_BUFFER, o);
+		glBufferData(GL_ARRAY_BUFFER, buffer_size_vertexes, buffer_vertexes, draw_type);
+	}
+}
+
+void VBO::Bind(int i, GLsizeiptr vSize, const void* vertexes, GLenum drawType) const
+{
+	if (i >= static_cast<int>(rpo.size()))
+	{
+		return;
+	}
+	
+	glBindVertexArray(rpo[i]);
+	glBindBuffer(GL_ARRAY_BUFFER, rpo[i]);
+	glBufferData(GL_ARRAY_BUFFER, vSize, vertexes, drawType);
 }
 
 void VBO::Unbind()
 {
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glBindVertexArray(0);
 }
 
 void VBO::Draw()
 {
-	Bind();
+	for (auto o : rpo)
+	{
+		glBindVertexArray(o);
+		glDrawArrays(prim_type, vertexes_index_first, vertexes_count);
+		glBindVertexArray(0);
+	}
+}
+
+void VBO::Draw(int i) const
+{
+	if (i >= static_cast<int>(rpo.size()))
+	{
+		return;
+	}
+	
+	glBindVertexArray(rpo[i]);
 	glDrawArrays(prim_type, vertexes_index_first, vertexes_count);
-	Unbind();
+	glBindVertexArray(0);
 }
 
 void VBO::Destroy(int n)
 {
-	glDeleteBuffers(n, &rpo);
+	glDeleteBuffers(n, rpo.data());
 }
 
 
@@ -60,11 +87,6 @@ void VBO::Destroy(int n)
 VAO::VAO()
 {
 	vbo = new VBO();
-}
-
-VAO::~VAO()
-{
-	delete(vbo);
 }
 
 void VAO::SetDataBuffer(GLsizeiptr size, const void* vertexes, GLenum drawType)
@@ -81,32 +103,62 @@ void VAO::SetDataDraw(GLint vFirst = 0, GLsizei vCount = 3, GLenum primType)
 
 void VAO::Gen(int num)
 {
-	glGenVertexArrays(num, &rpo);
+	rpo = std::vector<unsigned int>(num);
+	glGenVertexArrays(num, rpo.data());
 	vbo->Gen(num);
 }
 
 void VAO::Bind()
 {
-	glBindVertexArray(rpo);
 	vbo->Bind();
+
+	for (auto o : rpo)
+	{
+		glBindVertexArray(o);
+	}
+}
+
+void VAO::Bind(int i, GLsizeiptr vSize, const void* vertexes, GLenum drawType) const
+{
+	if (i >= static_cast<int>(rpo.size()))
+	{
+		return;
+	}
+	
+	vbo->Bind(i, vSize, vertexes, drawType);
+	glBindVertexArray(rpo[i]);
 }
 
 void VAO::Unbind()
 {
-	glBindVertexArray(0);
 	vbo->Unbind();
 }
 
 void VAO::Draw()
 {
-	glBindVertexArray(rpo);
+	for (auto o : rpo)
+	{
+		glBindVertexArray(o);
+		glDrawArrays(prim_type, vertexes_index_first, vertexes_count);
+		glBindVertexArray(0);
+	}
+}
+
+void VAO::Draw(int i) const
+{
+	if (i >= static_cast<int>(rpo.size()))
+	{
+		return;
+	}
+
+	glBindVertexArray(rpo[i]);
 	glDrawArrays(prim_type, vertexes_index_first, vertexes_count);
-	Unbind();
+	glBindVertexArray(0);
 }
 
 void VAO::Destroy(int n)
 {
-	glDeleteVertexArrays(n, &rpo);
+	glDeleteVertexArrays(n, rpo.data());
 	vbo->Destroy(n);
 }
 #pragma endregion
@@ -115,11 +167,6 @@ void VAO::Destroy(int n)
 EBO::EBO()
 {
 	vao = new VAO();
-}
-
-EBO::~EBO()
-{
-	delete(vao);
 }
 
 void EBO::SetDataBuffer(GLsizeiptr size_vertexes, const void* vertexes, GLsizeiptr size_indices, const void* indices, GLenum drawType)
@@ -140,33 +187,67 @@ void EBO::SetDataDraw(const void* iOffset, GLsizei iCount, GLenum iType, GLenum 
 
 void EBO::Gen(int num)
 {
-	glGenBuffers(num, &rpo);
+	rpo = std::vector<unsigned int>(num);
+	
 	vao->Gen(num);
+	glGenBuffers(num, rpo.data());
 }
 
 void EBO::Bind()
 {
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, rpo);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices_buffer), indices_buffer, type_draw);
 	vao->Bind();
+
+	for (auto o : rpo)
+	{
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, o);
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices_buffer_size, indices_buffer, type_draw);
+	}
+}
+
+void EBO::Bind(int i, GLsizeiptr vSize, const void* vertexes,
+               GLsizeiptr iSize, const void* indices, GLenum drawType) const
+{
+	if (i >= static_cast<int>(rpo.size()))
+	{
+		return;
+	}
+
+	vao->Bind(i, vSize, vertexes, drawType);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, rpo[i]);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, iSize, indices, drawType);
 }
 
 void EBO::Unbind()
 {
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+	// glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 	vao->Unbind();
 }
 
 void EBO::Draw()
 {
-	vao->Bind();
+	unsigned int vaoId = 0;
+	unsigned int vboId = 0;
+	vao->Get(&vaoId, &vboId);
+
+	glBindVertexArray(vaoId);
 	glDrawElements(type_prim, vertexes_count, type_indices, vertexes_offset);
-	vao->Unbind();
+	glBindVertexArray(0);
+}
+
+void EBO::Draw(int i) const
+{
+	unsigned int vaoId = 0;
+	unsigned int vboId = 0;
+	vao->Get(&vaoId, &vboId, i);
+
+	glBindVertexArray(vaoId);
+	glDrawElements(type_prim, vertexes_count, type_indices, vertexes_offset);
+	glBindVertexArray(0);
 }
 
 void EBO::Destroy(int n)
 {
-	glDeleteBuffers(n, &rpo);
+	glDeleteBuffers(n, rpo.data());
 	vao->Destroy(n);
 }
 #pragma endregion

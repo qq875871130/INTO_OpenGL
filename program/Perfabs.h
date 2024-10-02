@@ -1,19 +1,27 @@
 #pragma once
 #include "GLBase.h"
 
-class VBO : RPObject
+enum class ERpoType : unsigned int
+{
+	Vbo,
+	Vao,
+	Ebo
+};
+
+class VBO : public RPObject
 {
 public:
-	VBO();
-	~VBO() override;
+	VBO() = default;
 	void SetDataBuffer(GLsizeiptr, const void*, GLenum = GL_STATIC_DRAW);
 	void SetDataDraw(GLint, GLsizei, GLenum);
 	void Gen(int) override;
 	void Bind() override;
+	void Bind(int i, GLsizeiptr vSize, const void* vertexes, GLenum drawType = GL_STATIC_DRAW) const;
 	void Unbind() override;
 	void Draw() override;
+	void Draw(int) const;
 	void Destroy(int) override;
-	void Get(unsigned int*& vboId) { vboId = &rpo; }
+	void Get(unsigned int* vboId, int i = 0) const { *vboId = rpo[i]; }
 private:
 	GLsizeiptr buffer_size_vertexes = 0;
 	const void* buffer_vertexes;
@@ -23,22 +31,24 @@ private:
 	GLsizei vertexes_count = 3;
 };
 
-class VAO : RPObject
+class VAO : public RPObject
 {
 public:
 	VAO();
-	~VAO() override;
+	~VAO() override { delete vbo; }
 	void SetDataBuffer(GLsizeiptr, const void*, GLenum = GL_STATIC_DRAW);
 	void SetDataDraw(GLint, GLsizei, GLenum = GL_TRIANGLES);
 	void Gen(int) override;
 	void Bind() override;
+	void Bind(int i, GLsizeiptr vSize, const void* vertexes, GLenum drawType = GL_STATIC_DRAW) const;
 	void Unbind() override;
 	void Draw() override;
+	void Draw(int) const;
 	void Destroy(int) override;
 
-	void Get(unsigned int*& vaoId, unsigned int*& vboId)
+	void Get(unsigned int* vaoId, unsigned int* vboId, int i = 0) const
 	{
-		vaoId = &rpo;
+		*vaoId = rpo[i];
 		vbo->Get(vboId);
 	}
 private:
@@ -48,27 +58,29 @@ private:
 	GLsizei vertexes_count = 3;
 };
 
-class EBO : RPObject
+class EBO : public RPObject
 {
 public:
 	EBO();
-	~EBO() override;
+	~EBO() override { delete vao; }
 	void SetDataBuffer(GLsizeiptr size_vertexes, const void* vertexes, GLsizeiptr size_indices, const void* indices, GLenum drawType = GL_STATIC_DRAW);
 	void SetDataDraw(const void* iOffset, GLsizei iCount, GLenum iType = GL_UNSIGNED_INT, GLenum primType = GL_TRIANGLES);
 	void Gen(int) override;
 	void Bind() override;
+	void Bind(int i, GLsizeiptr vSize, const void* vertexes, GLsizeiptr iSize, const void* indices, GLenum drawType = GL_STATIC_DRAW) const;
 	void Unbind() override;
 	void Draw() override;
+	void Draw(int) const;
 	void Destroy(int) override;
-	void Get(unsigned int*& eboId, unsigned int*& vaoId, unsigned int*& vboId)
+	void Get(unsigned int* eboId, unsigned int* vaoId, unsigned int* vboId, int i = 0) const
 	{
-		eboId = &rpo;
+		*eboId = rpo[i];
 		vao->Get(vaoId, vboId);
 	}
 private:
 	VAO* vao;
 	GLsizeiptr indices_buffer_size = 0;
-	const void* indices_buffer;
+	const void* indices_buffer = nullptr;
 	GLenum type_draw = GL_STATIC_DRAW;
 	GLenum type_prim = GL_TRIANGLES;
 	GLenum type_indices = GL_UNSIGNED_INT;
@@ -76,3 +88,119 @@ private:
 	GLsizei vertexes_count = 3;
 };
 
+struct RpoContext
+{
+private:
+	RPObject* rpo;
+	unsigned int shaderProgram = 0;
+	
+public:
+	ERpoType RpoStrategy;
+
+	RpoContext(const ERpoType strategy) : RpoStrategy(strategy)
+	{
+		switch (strategy)
+		{
+		case ERpoType::Vbo:
+			rpo = new VBO();
+			break;
+		case ERpoType::Vao:
+			rpo = new VAO();
+			break;
+		case ERpoType::Ebo:
+			rpo = new EBO();
+			break;
+		}
+	}
+
+	RpoContext() :
+		rpo(new VBO()),
+		RpoStrategy(ERpoType::Vbo)
+	{
+	}
+
+	~RpoContext() { delete rpo; }
+	
+	static void ParseVertexes(GLuint index = 0, GLint size = 3, GLenum type = GL_FLOAT, GLboolean normalized = GL_FALSE, GLsizei stride = 3 * sizeof(float), const void *pointer = nullptr, GLuint startInd = 0)
+	{
+		glVertexAttribPointer(index, size, type, normalized, stride, pointer);
+		glEnableVertexAttribArray(startInd);
+	}
+
+
+	template<typename T>
+	T* GetRpo() const
+	{
+		return dynamic_cast<T*>(rpo);
+	}
+
+	RPObject* GetRpo() const
+	{
+		return rpo;
+	}
+
+	void GetRpoId(unsigned int* eboId, unsigned int* vaoId, unsigned int* vboId) const
+	{
+		switch (RpoStrategy)
+		{
+		case ERpoType::Vbo:
+			GetRpo<VBO>()->Get(vboId);
+			break;
+		case ERpoType::Vao:
+			GetRpo<VAO>()->Get(vaoId, vboId);
+			break;
+		case ERpoType::Ebo:
+			GetRpo<EBO>()->Get(eboId,vaoId, vboId);
+			break;
+		}
+	}
+
+	void SetDataBuffer(GLsizeiptr size_vertexes, const void* vertexes, GLsizeiptr size_indices,const void* indices, GLenum drawType = GL_STATIC_DRAW) const
+	{
+		if (RpoStrategy == ERpoType::Ebo) GetRpo<EBO>()->SetDataBuffer(size_vertexes, vertexes, size_indices, indices, drawType);
+		else if (RpoStrategy == ERpoType::Vao) GetRpo<VAO>()->SetDataBuffer(size_vertexes, vertexes, drawType);
+		else GetRpo<VBO>()->SetDataBuffer(size_vertexes, vertexes, drawType);
+	}
+
+	void SetDataDraw(GLint first, GLsizei count, const void* iOffset, GLenum iType, GLenum primType = GL_TRIANGLES) const
+	{
+		if (RpoStrategy == ERpoType::Ebo) GetRpo<EBO>()->SetDataDraw(iOffset, count, iType, primType);
+		else if (RpoStrategy == ERpoType::Vao) GetRpo<VAO>()->SetDataDraw(first, count, primType);
+		else GetRpo<VBO>()->SetDataDraw(first, count, primType);
+	}
+	
+	//Create, compile and attach shader to program
+	void InitShaderProgram(const char* vShaderSource, const char* fShaderSource)
+	{
+		//Create
+		unsigned int vertex_shader = glCreateShader(GL_VERTEX_SHADER);
+		unsigned int fragment_shader = glCreateShader(GL_FRAGMENT_SHADER);
+		
+		//Compile
+		glShaderSource(vertex_shader, 1, &vShaderSource, nullptr);
+		glCompileShader(vertex_shader);
+		glShaderSource(fragment_shader, 1, &fShaderSource, nullptr);
+		glCompileShader(fragment_shader);
+
+		shaderProgram = glCreateProgram();
+
+		//Attach/Link
+		glAttachShader(shaderProgram, vertex_shader);
+		glAttachShader(shaderProgram, fragment_shader);
+		glLinkProgram(shaderProgram);
+
+		//Release
+		glDeleteShader(vertex_shader);
+		glDeleteShader(fragment_shader);
+	}
+
+	void UseShaderProgram() const
+	{
+		glUseProgram(shaderProgram);
+	}
+
+	void ReleaseShaderProgram() const
+	{
+		glDeleteProgram(shaderProgram);
+	}
+};

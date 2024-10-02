@@ -1,5 +1,6 @@
 #pragma once
-#include "lib.h"
+#include <vector>
+
 #include "DataStruct.h"
 #include "Tools.h"
 
@@ -21,7 +22,6 @@ private:
 	GLenum render_polygon_face = GL_FRONT_AND_BACK;
 	GLenum render_polygon_mode = GL_FILL;
 
-
 	bool profile_core = true;
 
 protected:
@@ -36,7 +36,7 @@ protected:
 
 public:
 	Program();
-	virtual ~Program();
+	virtual ~Program() = default;
 	void SetProfile(bool coreMode);
 	void SetContextVersion(int min, int max);
 	void SetWindow(int width, int height, const char* title);
@@ -49,22 +49,14 @@ public:
 class RPObject
 {
 public:
-	RPObject();
+	RPObject() = default;
 	virtual ~RPObject() = default;
+
 	virtual void Gen(int) = 0;
 	virtual void Bind() = 0;
 	virtual void Unbind() = 0;
 	virtual void Draw() = 0;
 	virtual void Destroy(int) = 0;
 protected:
-	unsigned int rpo;
-};
-
-class RPContext
-{
-public:
-	RPContext(int, RPObject*);
-
-private:
-	RPObject* strategy;
+	std::vector<unsigned int> rpo;
 };

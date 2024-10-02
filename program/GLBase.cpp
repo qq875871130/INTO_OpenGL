@@ -1,16 +1,10 @@
 #include "GLBase.h"
 
-#include <cstddef>
-
 using namespace CvGlTools;
 
 #pragma region Program
 
 Program::Program()
-{
-}
-
-Program::~Program()
 {
 }
 
@@ -82,6 +76,10 @@ int Program::InitProfile()
     {
         glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     }
+    else
+    {
+        glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_COMPAT_PROFILE);
+    }
     return 0;
 }
 
@@ -144,22 +142,3 @@ void Program::Destroy()
 
 
 #pragma endregion
-
-RPContext::RPContext(int objID, RPObject* strategy)
-{
-    switch (objID)
-    {
-    case GL_VBO:
-        break;
-    case GL_VAO:
-        break;
-    case GL_EBO:
-        break;
-    default:
-        break;
-    }
-}
-
-RPObject::RPObject()
-{
-}
