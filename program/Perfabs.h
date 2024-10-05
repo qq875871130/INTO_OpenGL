@@ -212,9 +212,38 @@ public:
 	{
 		glUseProgram(shaderProgram);
 	}
-
+	
 	void ReleaseShaderProgram() const
 	{
 		glDeleteProgram(shaderProgram);
+	}
+
+	static unsigned int InitShaderProgram(const std::vector<unsigned int>& shaderIDs, const std::vector<const char*>& shaderSources)
+	{
+		unsigned int program = glCreateProgram();
+		
+		for (int i = 0; i < static_cast<int>(shaderIDs.size()); ++i)
+		{
+			glShaderSource(shaderIDs[i], 1, &(shaderSources[i]), nullptr);
+			glCompileShader(shaderIDs[i]);
+			glAttachShader(program, shaderIDs[i]);
+		}
+
+		glLinkProgram(program);
+		for (const auto id : shaderIDs)
+		{
+			glDeleteShader(id);
+		}
+		return program;
+	}
+
+	static void UseShaderProgram(const unsigned int programId)
+	{
+		glUseProgram(programId);
+	}
+
+	static void ReleaseShaderProgram(const unsigned int programId)
+	{
+		glDeleteProgram(programId);
 	}
 };

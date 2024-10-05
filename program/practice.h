@@ -146,10 +146,83 @@ namespace Practice
             return Start(vertices1, vertices2, GL_TRIANGLES);
         }
     };
+
+    class HelloTrianglePractice3 : Program
+    {
+    public:
+        std::vector<float> Vertices;
+        std::vector<unsigned int> Indices;
+
+    private:
+        RpoContext* Context;
+        GLenum PrimType = GL_TRIANGLES;
+
+    public:
+        HelloTrianglePractice3()
+            : Context(new RpoContext(ERpoType::Ebo))
+        {
+        }
+
+        ~HelloTrianglePractice3() override { delete Context; }
+
+    private:
+        const char* vertexShaderSource = "#version 460 core\n"
+            "layout (location = 0) in vec3 aPos;\n"
+            "void main()\n"
+            "{\n"
+            "   gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
+            "}\0";
+        const char* fragmentShaderSource1 = "#version 460 core\n"
+            "out vec4 FragColor;\n"
+            "void main()\n"
+            "{\n"
+            "   FragColor = vec4(0.0f, 1.0f, 1.0f, 1.0f);\n"
+            "}\0";
+        const char* fragmentShaderSource2 = "#version 460 core\n"
+            "out vec4 FragColor;\n"
+            "void main()\n"
+            "{\n"
+            "   FragColor = vec4(1.0f, 1.0f, 0.0f, 1.0f);\n"
+            "}\0";
+
+        unsigned int shaderProgram1 = 0;
+        unsigned int shaderProgram2 = 0;
+
+    protected:
+        int InitOther() override;
+        void LoopRender() override;
+        void Destroy() override;
+
+    public:
+        static int Start(const std::vector<float>& vertices, const std::vector<unsigned int>& indices, GLenum primType)
+        {
+            const auto base = new HelloTrianglePractice3();
+            base->Vertices = vertices;
+            base->Indices = indices;
+            base->PrimType = primType;
+            return base->Run();
+        }
+
+        static int Start()
+        {
+            std::vector<float> vertexes
+            {
+                0.0f, 0.0f, 0.0f,
+                -0.5f, 0.0f, 0.0f,
+                0.0f, 0.5f, 0.0f,
+                0.0f, -0.5f, 0.0f,
+                0.5f, 0.0f, 0.0f,
+            };
+            
+            std::vector<unsigned int> indices
+            {
+                0, 1, 2,
+                0, 3, 4,
+            };
+
+            return Start(vertexes, indices, GL_TRIANGLES);
+        }
+    };
 };
 
-int helloTrangle_practice1();
 
-int helloTrangle_practice2();
-
-int helloTrangle_practice3();

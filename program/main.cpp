@@ -31,7 +31,7 @@ int main() {
 	};
 
 	// return HelloTriangle::Start();
-	return Practice::HelloTrianglePractice2::Start();
+	return Practice::HelloTrianglePractice3::Start();
 }
 
 
