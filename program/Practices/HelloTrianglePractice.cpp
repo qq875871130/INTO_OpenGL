@@ -1,5 +1,5 @@
 #include "main.h"
-#include "practice.h"
+#include "HelloTrianglePractice.h"
 
 #include <windows.h>
 

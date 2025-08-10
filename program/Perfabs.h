@@ -8,10 +8,10 @@ enum class ERpoType : unsigned int
 	Ebo
 };
 
-class VBO : public RenderPipelineObject
+class VerticleBufferObject : public RenderPipelineObject
 {
 public:
-	VBO() = default;
+	VerticleBufferObject() = default;
 	void SetDataBuffer(GLsizeiptr, const void*, GLenum = GL_STATIC_DRAW);
 	void SetDataDraw(GLint, GLsizei, GLenum);
 	void Gen(int) override;
@@ -31,11 +31,11 @@ private:
 	GLsizei vertexes_count = 3;
 };
 
-class VAO : public RenderPipelineObject
+class VerticleArrayObject : public RenderPipelineObject
 {
 public:
-	VAO();
-	~VAO() override { delete vbo; }
+	VerticleArrayObject();
+	~VerticleArrayObject() override { delete vbo; }
 	void SetDataBuffer(GLsizeiptr, const void*, GLenum = GL_STATIC_DRAW);
 	void SetDataDraw(GLint, GLsizei, GLenum = GL_TRIANGLES);
 	void Gen(int) override;
@@ -52,7 +52,7 @@ public:
 		vbo->Get(vboId);
 	}
 private:
-	VBO* vbo;
+	VerticleBufferObject* vbo;
 	GLenum prim_type = GL_TRIANGLES;
 	GLint vertexes_index_first = 0;
 	GLsizei vertexes_count = 3;
@@ -78,7 +78,7 @@ public:
 		vao->Get(vaoId, vboId);
 	}
 private:
-	VAO* vao;
+	VerticleArrayObject* vao;
 	GLsizeiptr indices_buffer_size = 0;
 	const void* indices_buffer = nullptr;
 	GLenum type_draw = GL_STATIC_DRAW;
@@ -102,10 +102,10 @@ public:
 		switch (strategy)
 		{
 		case ERpoType::Vbo:
-			rpo = new VBO();
+			rpo = new VerticleBufferObject();
 			break;
 		case ERpoType::Vao:
-			rpo = new VAO();
+			rpo = new VerticleArrayObject();
 			break;
 		case ERpoType::Ebo:
 			rpo = new EBO();
@@ -114,7 +114,7 @@ public:
 	}
 
 	RpoContext() :
-		rpo(new VBO()),
+		rpo(new VerticleBufferObject()),
 		RpoStrategy(ERpoType::Vbo)
 	{
 	}
@@ -144,10 +144,10 @@ public:
 		switch (RpoStrategy)
 		{
 		case ERpoType::Vbo:
-			GetRpo<VBO>()->Get(vboId);
+			GetRpo<VerticleBufferObject>()->Get(vboId);
 			break;
 		case ERpoType::Vao:
-			GetRpo<VAO>()->Get(vaoId, vboId);
+			GetRpo<VerticleArrayObject>()->Get(vaoId, vboId);
 			break;
 		case ERpoType::Ebo:
 			GetRpo<EBO>()->Get(eboId,vaoId, vboId);
@@ -158,29 +158,29 @@ public:
 	void SetDataBuffer(GLsizeiptr size_vertexes, const void* vertexes, GLsizeiptr size_indices,const void* indices, GLenum drawType = GL_STATIC_DRAW) const
 	{
 		if (RpoStrategy == ERpoType::Ebo) GetRpo<EBO>()->SetDataBuffer(size_vertexes, vertexes, size_indices, indices, drawType);
-		else if (RpoStrategy == ERpoType::Vao) GetRpo<VAO>()->SetDataBuffer(size_vertexes, vertexes, drawType);
-		else GetRpo<VBO>()->SetDataBuffer(size_vertexes, vertexes, drawType);
+		else if (RpoStrategy == ERpoType::Vao) GetRpo<VerticleArrayObject>()->SetDataBuffer(size_vertexes, vertexes, drawType);
+		else GetRpo<VerticleBufferObject>()->SetDataBuffer(size_vertexes, vertexes, drawType);
 	}
 
 	void SetDataDraw(GLint first, GLsizei count, const void* iOffset, GLenum iType, GLenum primType = GL_TRIANGLES) const
 	{
 		if (RpoStrategy == ERpoType::Ebo) GetRpo<EBO>()->SetDataDraw(iOffset, count, iType, primType);
-		else if (RpoStrategy == ERpoType::Vao) GetRpo<VAO>()->SetDataDraw(first, count, primType);
-		else GetRpo<VBO>()->SetDataDraw(first, count, primType);
+		else if (RpoStrategy == ERpoType::Vao) GetRpo<VerticleArrayObject>()->SetDataDraw(first, count, primType);
+		else GetRpo<VerticleBufferObject>()->SetDataDraw(first, count, primType);
 	}
 
 	void BindByIndex(int i, GLsizeiptr vSize, const void* vertexes, GLsizeiptr iSize, const void* indices, GLenum drawType) const
 	{
 		if (RpoStrategy == ERpoType::Ebo) GetRpo<EBO>()->Bind(i, vSize, vertexes, iSize, indices, drawType);
-		else if (RpoStrategy == ERpoType::Vao) GetRpo<VAO>()->Bind(i, vSize, vertexes, drawType);
-		else GetRpo<VBO>()->Bind(i, vSize, vertexes, drawType);
+		else if (RpoStrategy == ERpoType::Vao) GetRpo<VerticleArrayObject>()->Bind(i, vSize, vertexes, drawType);
+		else GetRpo<VerticleBufferObject>()->Bind(i, vSize, vertexes, drawType);
 	}
 
 	void DrawByIndex(int i) const
 	{
 		if (RpoStrategy == ERpoType::Ebo) GetRpo<EBO>()->Draw(i);
-		else if (RpoStrategy == ERpoType::Vao) GetRpo<VAO>()->Draw(i);
-		else GetRpo<VBO>()->Draw(i);
+		else if (RpoStrategy == ERpoType::Vao) GetRpo<VerticleArrayObject>()->Draw(i);
+		else GetRpo<VerticleBufferObject>()->Draw(i);
 	}
 	
 	//Create, compile and attach shader to program

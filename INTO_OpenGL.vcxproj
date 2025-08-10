@@ -579,7 +579,7 @@
       <SDLCheck>true</SDLCheck>
       <LinkCompiled>true</LinkCompiled>
     </ClCompile>
-    <ClCompile Include="program\Practices\practice.cpp">
+    <ClCompile Include="program\Practices\HelloTrianglePractice.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <Optimization>Disabled</Optimization>
@@ -730,12 +730,12 @@
     <ClInclude Include="program\Base\HelloTriangle.h" />
     <ClInclude Include="program\Base\HelloWindow.h" />
     <ClInclude Include="program\CVGl\Tools.h" />
-    <ClInclude Include="program\Data\DataStruct.h" />
+    <ClInclude Include="program\Data\Vector.h" />
     <ClInclude Include="program\GLBase.h" />
     <ClInclude Include="program\lib.h" />
     <ClInclude Include="program\main.h" />
     <ClInclude Include="program\Perfabs.h" />
-    <ClInclude Include="program\Practices\practice.h" />
+    <ClInclude Include="program\Practices\HelloTrianglePractice.h" />
     <ClInclude Include="program\Utils.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>

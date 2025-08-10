@@ -2,7 +2,7 @@
 
 #include <vector>
 
-#include "Practices/practice.h"
+#include "Practices/HelloTrianglePractice.h"
 
 int main() {
 	std::vector<float> vertices

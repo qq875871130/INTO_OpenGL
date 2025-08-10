@@ -4,27 +4,27 @@
 
 #pragma region VBO
 
-void VBO::SetDataBuffer(GLsizeiptr size, const void* vertexes, GLenum drawType)
+void VerticleBufferObject::SetDataBuffer(GLsizeiptr size, const void* vertexes, GLenum drawType)
 {
 	buffer_size_vertexes = size;
 	buffer_vertexes = vertexes;
 	draw_type = drawType;
 }
 
-void VBO::SetDataDraw(GLint vFirst = 0, GLsizei vCount = 3, GLenum primType = GL_TRIANGLES)
+void VerticleBufferObject::SetDataDraw(GLint vFirst = 0, GLsizei vCount = 3, GLenum primType = GL_TRIANGLES)
 {
 	vertexes_index_first = vFirst;
 	vertexes_count = vCount;
 	prim_type = primType;
 }
 
-void VBO::Gen(int num)
+void VerticleBufferObject::Gen(int num)
 {
 	rpo = std::vector<unsigned int>(num);
 	glGenBuffers(num, rpo.data());
 }
 
-void VBO::Bind()
+void VerticleBufferObject::Bind()
 {
 	for (auto o : rpo)
 	{
@@ -34,7 +34,7 @@ void VBO::Bind()
 	}
 }
 
-void VBO::Bind(int i, GLsizeiptr vSize, const void* vertexes, GLenum drawType) const
+void VerticleBufferObject::Bind(int i, GLsizeiptr vSize, const void* vertexes, GLenum drawType) const
 {
 	if (i >= static_cast<int>(rpo.size()))
 	{
@@ -46,13 +46,13 @@ void VBO::Bind(int i, GLsizeiptr vSize, const void* vertexes, GLenum drawType) c
 	glBufferData(GL_ARRAY_BUFFER, vSize, vertexes, drawType);
 }
 
-void VBO::Unbind()
+void VerticleBufferObject::Unbind()
 {
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindVertexArray(0);
 }
 
-void VBO::Draw()
+void VerticleBufferObject::Draw()
 {
 	for (auto o : rpo)
 	{
@@ -62,7 +62,7 @@ void VBO::Draw()
 	}
 }
 
-void VBO::Draw(int i) const
+void VerticleBufferObject::Draw(int i) const
 {
 	if (i >= static_cast<int>(rpo.size()))
 	{
@@ -74,7 +74,7 @@ void VBO::Draw(int i) const
 	glBindVertexArray(0);
 }
 
-void VBO::Destroy(int n)
+void VerticleBufferObject::Destroy(int n)
 {
 	glDeleteBuffers(n, rpo.data());
 }
@@ -84,31 +84,31 @@ void VBO::Destroy(int n)
 #pragma endregion
 
 #pragma region VAO
-VAO::VAO()
+VerticleArrayObject::VerticleArrayObject()
 {
-	vbo = new VBO();
+	vbo = new VerticleBufferObject();
 }
 
-void VAO::SetDataBuffer(GLsizeiptr size, const void* vertexes, GLenum drawType)
+void VerticleArrayObject::SetDataBuffer(GLsizeiptr size, const void* vertexes, GLenum drawType)
 {
 	vbo->SetDataBuffer(size, vertexes, drawType);
 }
 
-void VAO::SetDataDraw(GLint vFirst = 0, GLsizei vCount = 3, GLenum primType)
+void VerticleArrayObject::SetDataDraw(GLint vFirst = 0, GLsizei vCount = 3, GLenum primType)
 {
 	vertexes_index_first = vFirst;
 	vertexes_count = vCount;
 	prim_type = primType;
 }
 
-void VAO::Gen(int num)
+void VerticleArrayObject::Gen(int num)
 {
 	rpo = std::vector<unsigned int>(num);
 	glGenVertexArrays(num, rpo.data());
 	vbo->Gen(num);
 }
 
-void VAO::Bind()
+void VerticleArrayObject::Bind()
 {
 	vbo->Bind();
 
@@ -118,7 +118,7 @@ void VAO::Bind()
 	}
 }
 
-void VAO::Bind(int i, GLsizeiptr vSize, const void* vertexes, GLenum drawType) const
+void VerticleArrayObject::Bind(int i, GLsizeiptr vSize, const void* vertexes, GLenum drawType) const
 {
 	if (i >= static_cast<int>(rpo.size()))
 	{
@@ -129,12 +129,12 @@ void VAO::Bind(int i, GLsizeiptr vSize, const void* vertexes, GLenum drawType) c
 	glBindVertexArray(rpo[i]);
 }
 
-void VAO::Unbind()
+void VerticleArrayObject::Unbind()
 {
 	vbo->Unbind();
 }
 
-void VAO::Draw()
+void VerticleArrayObject::Draw()
 {
 	for (auto o : rpo)
 	{
@@ -144,7 +144,7 @@ void VAO::Draw()
 	}
 }
 
-void VAO::Draw(int i) const
+void VerticleArrayObject::Draw(int i) const
 {
 	if (i >= static_cast<int>(rpo.size()))
 	{
@@ -156,7 +156,7 @@ void VAO::Draw(int i) const
 	glBindVertexArray(0);
 }
 
-void VAO::Destroy(int n)
+void VerticleArrayObject::Destroy(int n)
 {
 	glDeleteVertexArrays(n, rpo.data());
 	vbo->Destroy(n);
@@ -166,7 +166,7 @@ void VAO::Destroy(int n)
 #pragma region EBO
 EBO::EBO()
 {
-	vao = new VAO();
+	vao = new VerticleArrayObject();
 }
 
 void EBO::SetDataBuffer(GLsizeiptr size_vertexes, const void* vertexes, GLsizeiptr size_indices, const void* indices, GLenum drawType)

@@ -1,7 +1,7 @@
 #pragma once
 #include <vector>
 
-#include "Data/DataStruct.h"
+#include "Data/Vector.h"
 #include "CVGl/Tools.h"
 
 class RenderProgram
