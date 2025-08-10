@@ -6,7 +6,7 @@
 
 namespace Practice
 {
-    class HelloTrianglePractice1 : Program
+    class HelloTrianglePractice1 : RenderProgram
     {
     public:
         std::vector<float> Vertices;
@@ -79,7 +79,7 @@ namespace Practice
         }
     };
 
-    class HelloTrianglePractice2 : Program
+    class HelloTrianglePractice2 : RenderProgram
     {
     public:
         std::vector<float> Vertices1;
@@ -147,7 +147,7 @@ namespace Practice
         }
     };
 
-    class HelloTrianglePractice3 : Program
+    class HelloTrianglePractice3 : RenderProgram
     {
     public:
         std::vector<float> Vertices;

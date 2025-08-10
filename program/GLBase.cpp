@@ -4,12 +4,12 @@ using namespace CvGlTools;
 
 #pragma region Program
 
-Program::Program()
+RenderProgram::RenderProgram()
 {
 }
 
 
-int Program::Run()
+int RenderProgram::Run()
 {
     InitProfile();
     if (InitContext() == 0)
@@ -29,36 +29,36 @@ int Program::Run()
 
 
 #pragma region Configurable
-void Program::SetProfile(bool coreMode)
+void RenderProgram::SetProfile(bool coreMode)
 {
     profile_core = coreMode;
 }
 
-void Program::SetContextVersion(int min, int max)
+void RenderProgram::SetContextVersion(int min, int max)
 {
     context_version_min = min;
     context_version_max = max;
 }
 
-void Program::SetWindow(int width, int height, const char* title = "LearnOpenGL")
+void RenderProgram::SetWindow(int width, int height, const char* title = "LearnOpenGL")
 {
     window_width = width;
     window_height = height;
     window_title = title;
 }
 
-void Program::SetWindow(GLFWmonitor* monitor, GLFWwindow* share)
+void RenderProgram::SetWindow(GLFWmonitor* monitor, GLFWwindow* share)
 {
     window_monitor = monitor;
     window_share = share;
 }
 
-void Program::SetField(GLbitfield clearBit)
+void RenderProgram::SetField(GLbitfield clearBit)
 {
     window_clear_field = clearBit;
 }
 
-void Program::SetFieldColor(Vec4<float> clearColor)
+void RenderProgram::SetFieldColor(Vec4<float> clearColor)
 {
     window_clear_color = clearColor;
 }
@@ -66,7 +66,7 @@ void Program::SetFieldColor(Vec4<float> clearColor)
 
 
 #pragma region Virtualizable
-int Program::InitProfile()
+int RenderProgram::InitProfile()
 {
     glfwInit();
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, context_version_max);
@@ -83,7 +83,7 @@ int Program::InitProfile()
     return 0;
 }
 
-int Program::InitContext()
+int RenderProgram::InitContext()
 {
     //Create Window
     window = glfwCreateWindow(window_width, window_height, window_title, window_monitor, window_share);
@@ -97,7 +97,7 @@ int Program::InitContext()
     return 0;
 }
 
-int Program::InitOther()
+int RenderProgram::InitOther()
 {
     //Init GLAD
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
@@ -111,13 +111,13 @@ int Program::InitOther()
     return 0;
 }
 
-void Program::LoopInput()
+void RenderProgram::LoopInput()
 {
     //Check Default Input Event
     ProcessInputKeyPress(window, GLFW_KEY_ESCAPE, [this]() { glfwSetWindowShouldClose(window, true); });
 }
 
-void Program::LoopRender()
+void RenderProgram::LoopRender()
 {
     //Render Command
     glPolygonMode(render_polygon_face, render_polygon_mode);
@@ -125,14 +125,14 @@ void Program::LoopRender()
     glClear(window_clear_field);
 }
 
-void Program::LoopApply()
+void RenderProgram::LoopApply()
 {
     //Checking and Swap Buffer
     glfwSwapBuffers(window);
     glfwPollEvents();
 }
 
-void Program::Destroy()
+void RenderProgram::Destroy()
 {
     //Render Terminate
     glfwTerminate();

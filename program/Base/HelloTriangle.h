@@ -3,7 +3,7 @@
 #include "GLBase.h"
 
 
-class HelloTriangle : Program
+class HelloTriangle : RenderProgram
 {
 private:
 #pragma region Hard-encode GLSL

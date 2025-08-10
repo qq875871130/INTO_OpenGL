@@ -1,8 +1,9 @@
 #include "HelloWindow.h"
+#include "GLBase.h"
 
 int HelloWindow::Start()
 {
-	Program* base = new Program();
+	RenderProgram* base = new RenderProgram();
 	int result = base->Run();
 
 	return result;

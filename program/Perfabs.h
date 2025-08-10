@@ -8,7 +8,7 @@ enum class ERpoType : unsigned int
 	Ebo
 };
 
-class VBO : public RPObject
+class VBO : public RenderPipelineObject
 {
 public:
 	VBO() = default;
@@ -31,7 +31,7 @@ private:
 	GLsizei vertexes_count = 3;
 };
 
-class VAO : public RPObject
+class VAO : public RenderPipelineObject
 {
 public:
 	VAO();
@@ -58,7 +58,7 @@ private:
 	GLsizei vertexes_count = 3;
 };
 
-class EBO : public RPObject
+class EBO : public RenderPipelineObject
 {
 public:
 	EBO();
@@ -91,7 +91,7 @@ private:
 struct RpoContext
 {
 private:
-	RPObject* rpo;
+	RenderPipelineObject* rpo;
 	unsigned int shaderProgram = 0;
 	
 public:
@@ -134,7 +134,7 @@ public:
 		return dynamic_cast<T*>(rpo);
 	}
 
-	RPObject* GetRpo() const
+	RenderPipelineObject* GetRpo() const
 	{
 		return rpo;
 	}

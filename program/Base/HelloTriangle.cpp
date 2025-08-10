@@ -4,7 +4,7 @@
 
 int HelloTriangle::InitOther()
 {
-	Program::InitOther();
+	RenderProgram::InitOther();
 
 	float vertices[] = {
 		-0.5f, -0.5f, 0.0f,
@@ -96,7 +96,7 @@ int HelloTriangle::InitOther()
 
 void HelloTriangle::LoopRender()
 {
-	Program::LoopRender();
+	RenderProgram::LoopRender();
 	//Activate program
 	glUseProgram(shader_program);
 	glBindVertexArray(vao);
@@ -112,7 +112,7 @@ void HelloTriangle::Destroy()
 	glDeleteBuffers(1, &vbo);
 	glDeleteBuffers(1, &ebo);
 	glDeleteProgram(shader_program);
-	Program::Destroy();
+	RenderProgram::Destroy();
 }
 
 int HelloTriangle::Start()

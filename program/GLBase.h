@@ -1,10 +1,10 @@
 #pragma once
 #include <vector>
 
-#include "DataStruct.h"
-#include "Tools.h"
+#include "Data/DataStruct.h"
+#include "CVGl/Tools.h"
 
-class Program
+class RenderProgram
 {
 private:
 	int context_version_min = 4;
@@ -35,8 +35,8 @@ protected:
 	virtual void Destroy();
 
 public:
-	Program();
-	virtual ~Program() = default;
+	RenderProgram();
+	virtual ~RenderProgram() = default;
 	void SetProfile(bool coreMode);
 	void SetContextVersion(int min, int max);
 	void SetWindow(int width, int height, const char* title);
@@ -46,11 +46,11 @@ public:
 	virtual int Run();
 };
 
-class RPObject
+class RenderPipelineObject
 {
 public:
-	RPObject() = default;
-	virtual ~RPObject() = default;
+	RenderPipelineObject() = default;
+	virtual ~RenderPipelineObject() = default;
 
 	virtual void Gen(int) = 0;
 	virtual void Bind() = 0;

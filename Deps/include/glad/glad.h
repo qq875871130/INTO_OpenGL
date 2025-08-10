@@ -29,7 +29,9 @@
 #define __gl_h_
 
 #if defined(_WIN32) && !defined(APIENTRY) && !defined(__CYGWIN__) && !defined(__SCITECH_SNAP__)
+#ifndef APIENTRY __stdcall
 #define APIENTRY __stdcall
+#endif
 #endif
 
 #ifndef APIENTRY

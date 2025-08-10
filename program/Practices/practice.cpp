@@ -5,7 +5,7 @@
 
 int Practice::HelloTrianglePractice1::InitOther()
 {
-	Program::InitOther();
+	RenderProgram::InitOther();
 
 	//Init rpo
 	Context->GetRpo()->Gen(1);
@@ -29,7 +29,7 @@ int Practice::HelloTrianglePractice1::InitOther()
 
 void Practice::HelloTrianglePractice1::LoopRender()
 {
-	Program::LoopRender();
+	RenderProgram::LoopRender();
 
 	//Active program
 	Context->UseShaderProgram();
@@ -44,12 +44,12 @@ void Practice::HelloTrianglePractice1::Destroy()
 	Context->GetRpo()->Destroy(1);
 	Context->ReleaseShaderProgram();
 	
-	Program::Destroy();
+	RenderProgram::Destroy();
 }
 
 int Practice::HelloTrianglePractice2::InitOther()
 {
-	Program::InitOther();
+	RenderProgram::InitOther();
 
 	//Init
 	Context->GetRpo()->Gen(2);
@@ -72,7 +72,7 @@ int Practice::HelloTrianglePractice2::InitOther()
 
 void Practice::HelloTrianglePractice2::LoopRender()
 {
-	Program::LoopRender();
+	RenderProgram::LoopRender();
 
 	Context->UseShaderProgram();
 	Context->SetDataDraw(0, 3, nullptr, GL_UNSIGNED_INT, PrimType);
@@ -84,12 +84,12 @@ void Practice::HelloTrianglePractice2::Destroy()
 	Context->GetRpo()->Destroy(2);
 	Context->ReleaseShaderProgram();
 
-	Program::Destroy();
+	RenderProgram::Destroy();
 }
 
 int Practice::HelloTrianglePractice3::InitOther()
 {
-	Program::InitOther();
+	RenderProgram::InitOther();
 
 	auto vexShader = glCreateShader(GL_VERTEX_SHADER);
 	auto fragShader = glCreateShader(GL_FRAGMENT_SHADER);
@@ -115,7 +115,7 @@ int Practice::HelloTrianglePractice3::InitOther()
 
 void Practice::HelloTrianglePractice3::LoopRender()
 {
-	Program::LoopRender();
+	RenderProgram::LoopRender();
 
 	Context->GetRpo()->Bind();
 	
@@ -136,5 +136,5 @@ void Practice::HelloTrianglePractice3::Destroy()
 	RpoContext::ReleaseShaderProgram(shaderProgram1);
 	RpoContext::ReleaseShaderProgram(shaderProgram2);
 	
-	Program::Destroy();
+	RenderProgram::Destroy();
 }

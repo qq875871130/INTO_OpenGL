@@ -2,7 +2,7 @@
 
 #include <vector>
 
-#include "practice.h"
+#include "Practices/practice.h"
 
 int main() {
 	std::vector<float> vertices
